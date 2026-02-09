@@ -4,20 +4,21 @@ orbs:
   sedstart: sedstart/cicd@dev:1
  
 jobs:
-  run-sedstart-local-mac:
-    macos:
-      xcode: 16.4.0
-    resource_class: m4pro.medium
+  run-sedstart-cloud:
+    docker:
+      - image: cimg/node:20.18.0
     steps:
-      - checkout
-      - sedstart/runlocal:
-          api_key: SEDSTART_API_KEY
-          project_id: 18
+      - run:
+          name: "Debug: show env"
+          command: |
+            echo "Testing sedstart-shinobi orb (dev)"
+      - sedstart/runcloud:
+          api_key: SED_API
           test_id: 74
+          project_id: 18
           profile_id: 36
-          browser: "webkit"
  
 workflows:
-  test-workflow:
+  main:
     jobs:
-      - run-sedstart-local-mac
+      - run-sedstart-cloud
