@@ -1,24 +1,19 @@
 version: 2.1
- 
 orbs:
-  sedstart: sedstart/cicd@dev:1
- 
+  cicd: sedstart/cicd@dev:1
 jobs:
-  run-sedstart-cloud:
+  test:
     docker:
-      - image: cimg/node:20.18.0
+      - image: cimg/node:25.2.1
     steps:
-      - run:
-          name: "Debug: show env"
-          command: |
-            echo "Testing sedstart-shinobi orb (dev)"
-      - sedstart/runcloud:
-          api_key: SED_API
-          test_id: 74
+      - cicd/runcloud:    
+          api_key: SEDSTART_API_KEY_PROD      
           project_id: 18
+          test_id: 74
           profile_id: 36
- 
+          browser: chrome
+          headless: true
 workflows:
-  main:
+  test-workflow:
     jobs:
-      - run-sedstart-cloud
+      - test
