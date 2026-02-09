@@ -4,7 +4,7 @@ orbs:
   sedstart: sedstart/cicd@dev:1
  
 jobs:
-  run-sedstart-local-mac:
+  run-sedstart-local-linux:
     macos:
       xcode: 16.4.0
     resource_class: m4pro.medium
@@ -20,4 +20,4 @@ jobs:
 workflows:
   test-workflow:
     jobs:
-      - run-sedstart-local-mac
+      - run-sedstart-local-linux
